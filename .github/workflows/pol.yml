@@ -17,7 +17,7 @@ jobs:
         run: |
           cd backend
           go mod download
-          go buid -o $BACK_EXEC
+          go build -o $BACK_EXEC
           if [[ ! -f $BACK_EXEC ]]; then
             echo "::error title=This executable was not found $BACK_EXEC::"
             exit 1
