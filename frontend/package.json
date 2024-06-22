@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite ",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host --port $(env | grep POL_FRONT_PORT | cut -b 16-19)",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {

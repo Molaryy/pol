@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"slices"
+    "os"
+
 	"github.com/rs/cors"
 )
 
@@ -51,10 +54,16 @@ func getPosts(w http.ResponseWriter, r *http.Request) {
 
 func main() {
     mux := http.NewServeMux()
+    port := os.Getenv("POL_BACK_PORT")
+
+    if port == "" {
+        panic("Couldn't find env variable POL_BACK_PORT")
+    }
 
     mux.HandleFunc("/post", newPost)
     mux.HandleFunc("/posts", getPosts)
     
     handler := cors.Default().Handler(mux)
-    http.ListenAndServe(":8080", handler)
+    fmt.Printf("Listening on port %s...", port)
+    http.ListenAndServe(fmt.Sprintf(":%s", port), handler)
 }

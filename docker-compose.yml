@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  pol-back:
+    container_name: pol-back
+    env_file: .env
+    build: ./backend
+    ports:
+      - '${POL_BACK_PORT}:${POL_BACK_PORT}'
+    restart: always
+  pol-front:
+    container_name: pol-front
+    env_file: .env
+    build: ./frontend
+    ports:
+      - '${POL_FRONT_PORT}:${POL_FRONT_PORT}'
+    depends_on:
+      - pol-back
+    restart: always

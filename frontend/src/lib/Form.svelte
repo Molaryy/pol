@@ -4,8 +4,11 @@
   let email: string | undefined;
   let description: string | undefined;
   const createPost = async (e: SubmitEvent) => {
+    const url = `http://localhost:${import.meta.env.VITE_POL_BACK_PORT}`;
+    console.log(url);
+
     try {
-        const res = await fetch("http://127.0.0.1:8080/post", {
+        const res = await fetch(url + "/post", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

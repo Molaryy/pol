@@ -1,7 +1,12 @@
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 export default {
-  // Consult https://svelte.dev/docs#compile-time-svelte-preprocess
-  // for more information about preprocessors
+  server: {
+    port: 3030
+  },
+  preview: {
+    port: 8080
+  },
+  host: "0.0.0.0",
   preprocess: vitePreprocess(),
 }
