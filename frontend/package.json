@@ -1,14 +1,6 @@
 {
   "name": "test",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite ",
-    "build": "vite build",
-    "preview": "vite preview --host --port $(env | grep POL_FRONT_PORT | cut -b 16-19)",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
-  },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.2",
@@ -17,5 +9,17 @@
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host --port $(env | grep POL_FRONT_PORT | cut -b 16-19)",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "cy:open": "cypress open"
+  },
+  "type": "module",
+  "dependencies": {
+    "cypress": "^13.13.1"
   }
 }
