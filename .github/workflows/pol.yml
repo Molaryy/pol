@@ -35,6 +35,9 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: node:21.6.2
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -42,7 +45,6 @@ jobs:
           node-version: 21.6.2
       - uses: cypress-io/github-action@v6
       - name: build project front
-        working-directory: frontend
         run: |
           yarn install
           yarn build
