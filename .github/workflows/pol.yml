@@ -10,31 +10,31 @@ env:
   BACK_EXEC: "pol-back"
 
 jobs:
-  ##pol-back-build:
-  ##  runs-on: ubuntu-22.04
-  ##  container:
-    ##    image: golang:1.22.5
-    ##  defaults:
-      ##    run:
-        ##      working-directory: backend
-        ##  steps:
-          ##    - uses: actions/checkout@v4
-          ##    - uses: actions/setup-go@v5
-          ##      with:
-            ##        go-version: 1.22.5
-            ##    - name: build project
-            ##      run: |
-              ##        go get .
-              ##        go build -o $BACK_EXEC -buildvcs=false
-              ##        if [[ ! -f $BACK_EXEC ]]; then
-              ##          echo "::error title=This executable was not found $BACK_EXEC::"
-              ##          exit 1
-              ##        fi
-  pol-front:
-    ##needs: pol-back-build
+  pol-back-build:
     runs-on: ubuntu-22.04
     container:
-      image: node-20.15.1-chrome-126.0.6478.126-1-ff-128.0-edge-126.0.2592.102-1
+      image: golang:1.22.5
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.22.5
+      - name: build project
+        run: |
+          go get .
+          go build -o $BACK_EXEC -buildvcs=false
+          if [[ ! -f $BACK_EXEC ]]; then
+            echo "::error title=This executable was not found $BACK_EXEC::"
+            exit 1
+          fi
+  pol-front:
+    needs: pol-back-build
+    runs-on: ubuntu-22.04
+    container:
+      image: node:21.6.2
     defaults:
       run:
         working-directory: frontend
@@ -53,8 +53,7 @@ jobs:
         run: yarn build
       - uses: cypress-io/github-action@v6
         with:
-          browser: chrome
-          record: false
+          working-directory: frontend
       - name: Run cypress tests
         run: |
           yarn cypress install
