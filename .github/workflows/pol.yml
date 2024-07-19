@@ -34,7 +34,7 @@ jobs:
     needs: pol-back-build
     runs-on: ubuntu-22.04
     container:
-      image: node:21.6.2
+      image: cypress/browser:node-20.15.1-chrome-126.0.6478.126-1-ff-128.0-edge-126.0.2592.102-1
     defaults:
       run:
         working-directory: frontend
@@ -52,6 +52,9 @@ jobs:
       - name: Build project
         run: yarn build
       - uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          record: false
       - name: Run cypress tests
         run: |
           yarn cypress install
