@@ -30,8 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: build project front
+        working-directory: ./frontend
         run: |
-          cd frontend
           bun install
           bun run build
   pol-front-cypress-tests:
@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: cypress-io/github-action@v6
       - name: test project front using cypress
+        working-directory: ./frontend
         run: |
-          cd frontend
           bun install
           bun run cy:run
