@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - fix/ci
+      - feat/ci
 
 env:
   BACK_EXEC: "pol-back"
@@ -17,9 +17,8 @@ jobs:
     steps:
       - uses: actions/setup-go@v5
       - name: build project
+        working-directory: backend
         run: |
-          ls
-          go mod download
           go build -o $BACK_EXEC
           if [[ ! -f $BACK_EXEC ]]; then
             echo "::error title=This executable was not found $BACK_EXEC::"
