@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "pol",
   "version": "0.0.0",
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
