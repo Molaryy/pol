@@ -33,8 +33,6 @@ jobs:
   pol-front:
     ##needs: pol-back-build
     runs-on: ubuntu-22.04
-    container:
-      image: node:21.6.2
     defaults:
       run:
         working-directory: frontend
@@ -54,7 +52,9 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           working-directory: frontend
+          build: yarn build
+          start: yarn start
+          wait-on-timeout: 300
       - name: Run cypress tests
         run: |
-          yarn cypress install
           yarn cy:run
