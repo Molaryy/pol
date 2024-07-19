@@ -14,8 +14,8 @@ jobs:
     steps:
       - uses: actions/setup-go@v5
       - name: build project
+        working-directory: ./backend
         run: |
-          cd backend
           go mod download
           go build -o $BACK_EXEC
           if [[ ! -f $BACK_EXEC ]]; then
