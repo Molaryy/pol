@@ -48,7 +48,7 @@
                 <input type="text" id="description" placeholder="Hello World!"  bind:value={description}/>
             </label>
         </div>
-        <button>
+        <button id="post-button">
           Submit
         </button>
     </form>
