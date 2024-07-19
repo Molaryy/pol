@@ -51,6 +51,7 @@ jobs:
         run: yarn install
       - name: Build project
         run: yarn build
+      - uses: cypress-io/github-action@v6
       - name: Run cypress tests
         run: |
           yarn cypress install
