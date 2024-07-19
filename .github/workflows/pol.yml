@@ -2,6 +2,9 @@ name: pol
 
 on:
   push:
+    branches:
+      - master
+      - feat/ci
 
 env:
   BACK_EXEC: "pol-back"
@@ -14,8 +17,8 @@ jobs:
     steps:
       - uses: actions/setup-go@v5
       - name: build project
-        working-directory: ./backend
         run: |
+          ls
           go mod download
           go build -o $BACK_EXEC
           if [[ ! -f $BACK_EXEC ]]; then
@@ -30,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: build project front
-        working-directory: ./frontend
+        working-directory: frontend
         run: |
           bun install
           bun run build
@@ -42,7 +45,7 @@ jobs:
     steps:
       - uses: cypress-io/github-action@v6
       - name: test project front using cypress
-        working-directory: ./frontend
+        working-directory: frontend
         run: |
           bun install
           bun run cy:run
