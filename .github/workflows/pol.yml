@@ -8,17 +8,12 @@ env:
 
 jobs:
   pol-back-build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go-version: [ '1.19', '1.20', '1.21.x' ]
+    runs-on: ubuntu-22.04
+    container:
+      image: golang:1.22.5
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Go ${{ matrix.go-version }}
-        uses: actions/setup-go@v5
-        with:
-          go-version: ${{ matrix.go-version }}
-      - name: Build Pol backend
+      - uses: actions/setup-go@v5
+      - name: build project
         run: |
           cd backend
           go mod download
@@ -28,7 +23,8 @@ jobs:
             exit 1
           fi
   pol-front-build:
-    runs-on: ubuntu-latest
+    needs: pol-back-build
+    runs-on: ubuntu-22.04
     container:
       image: oven/bun:1
     steps:
@@ -40,11 +36,11 @@ jobs:
           bun run build
   pol-front-cypress-tests:
     needs: pol-front-build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: oven/bun:1
     steps:
-      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v6
       - name: test project front using cypress
         run: |
           cd frontend

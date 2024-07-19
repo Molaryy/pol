@@ -9,7 +9,7 @@ Saw the video of [DevOps Journey](https://www.youtube.com/watch?v=KnSBNd3b0qI) a
 - Backend
     - Golang 1.22.2
 - Frontend
-    - React + Vite
+    - Svelte
 - Tests
     - The "testing" package in Go (not sure yet)
     - Cypress
