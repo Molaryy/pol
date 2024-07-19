@@ -43,9 +43,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 21.6.2
-      - uses: cypress-io/github-action@v6
-      - name: build project front
+      - name: install unzip for cypress
         run: |
-          yarn install
-          yarn build
+          apt update && yes| apt upgrade
+          yes | apt install unzip
+      - name: install dependencies
+        run: yarn install
+      - name: Build project
+        run: yarn build
+      - name: Run cypress tests
+        run: |
+          yarn cypress install
           yarn cy:run
