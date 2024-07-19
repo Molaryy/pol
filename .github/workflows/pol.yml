@@ -10,14 +10,25 @@ env:
   BACK_EXEC: "pol-back"
 
 jobs:
-  pol-back-build:
+  test-ls:
     runs-on: ubuntu-22.04
     container:
       image: golang:1.22.5
     steps:
-      - uses: actions/setup-go@v5
-      - name: build project
+      - name: test
+        run: |
+          ls
+  pol-back-build:
+    needs: test-ls
+    runs-on: ubuntu-22.04
+    container:
+      image: golang:1.22.5
+    defaults:
+      run:
         working-directory: backend
+    steps:
+      - uses: actions/setup-go@v4
+      - name: build project
         run: |
           go build -o $BACK_EXEC
           if [[ ! -f $BACK_EXEC ]]; then
