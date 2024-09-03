@@ -31,3 +31,7 @@ cypress/videos
 cypress/downloads
 
 .env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -1,0 +1,24 @@
+name: Soul connection
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-front:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ '18.x', '20.x' ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: build frontend
+        run: |
+          cd frontend
+          yarn install
+          yarn build
